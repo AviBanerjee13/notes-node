@@ -6,12 +6,18 @@ const notes = require('./notes.js');
 
 var argv = yargs.argv;
 var command = process.argv[2];
-console.log('Command: ', argv._[0]);
-console.log(process.argv);
-console.log(argv);
+// console.log('Command: ', argv._[0]);
+// console.log(process.argv);
+// console.log(argv);
 
 if(command === 'add'){
-    notes.addNote(argv.title, argv.body);
+   var note = notes.addNote(argv.title, argv.body);
+   if(_.isUndefined(note)){
+        console.log('Note with Title: ' + argv.title + ' & Body: ' + argv.body +' was not added');
+   } else {
+        console.log('Congratulations! Note was added successfully.');
+   }
+
 } else if(command === 'list'){
     notes.getAll();
 } else if(command === 'read'){
