@@ -33,27 +33,36 @@ var addNote = (title, body) => {
 };
 
 var getAll = () => {
-    console.log('Getting all nodes');
+    return fetchNotes();
 };
 
 var getNote = (title) => {
-    console.log('Reading: ', title);
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((note) => note.title === title);
+    return filteredNotes[0];
+    // default return type is undefined
+
 };
 
 var removeNote = (title) => {
     var notes = fetchNotes();
     var filteredNotes = notes.filter((note) => note.title !== title);
-    if(notes.length > filteredNotes.length && filteredNotes.length > 0){
-        saveNotes(filteredNotes);
-        return title;    
-    }
+    saveNotes(filteredNotes);
 
-    //Default return is undefined
+    return notes.length !== filteredNotes.length;
+};
+
+var logNote = (note) => {
+    debugger;
+    console.log('--');
+    console.log(`Title: ${note.title}`);
+    console.log(`Body: ${note.body}`);
 };
 
 module.exports = {
     addNote,
     getAll,
     getNote,
-    removeNote
+    removeNote,
+    logNote
 }
