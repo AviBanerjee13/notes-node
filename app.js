@@ -13,7 +13,7 @@ var command = process.argv[2];
 if(command === 'add'){
    var note = notes.addNote(argv.title, argv.body);
    if(_.isUndefined(note)){
-        console.log('Note with Title: ' + argv.title + ' & Body: ' + argv.body +' was not added');
+        console.log(`Note with Title: ${argv.title} & Body: ${argv.body} was not added`);
    } else {
         console.log('Congratulations! Note was added successfully.');
    }
@@ -23,7 +23,12 @@ if(command === 'add'){
 } else if(command === 'read'){
     notes.getNote(argv.title);
 } else if(command === 'remove'){
-    notes.removeNote(argv.title);
+    var note = notes.removeNote(argv.title);
+    if(_.isUndefined(note)){
+        console.log(`Note could be removed. Please verify the Title`);
+   } else {
+        console.log('Congratulations! Note was successfully removed.');
+   }
 } else{
     console.log('Command not recognized');
 }
